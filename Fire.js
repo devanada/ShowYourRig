@@ -5,7 +5,6 @@ import shrinkImageAsync from './utils/shrinkImageAsync';
 import uploadPhoto from './utils/uploadPhoto';
 
 const firebase = require('firebase');
-// Required for side-effects
 require('firebase/firestore');
 
 const collectionName = 'snack-SJucFknGX';
@@ -20,10 +19,8 @@ class Fire {
       storageBucket: 'showyourrig.appspot.com',
       messagingSenderId: '594985693891',
     });
-    // Some nonsense...
     firebase.firestore().settings({ timestampsInSnapshots: true });
 
-    // Listen for auth
     firebase.auth().onAuthStateChanged(async user => {
       if (!user) {
         await firebase.auth().signInAnonymously();
@@ -31,7 +28,6 @@ class Fire {
     });
   }
 
-  // Download Data
   getPaged = async ({ size, start }) => {
     let ref = this.collection.orderBy('timestamp', 'desc').limit(size);
     try {
@@ -45,7 +41,6 @@ class Fire {
         if (doc.exists) {
           const post = doc.data() || {};
 
-          // Reduce the name
           const user = post.user || {};
 
           const name = user.deviceName;
@@ -65,7 +60,6 @@ class Fire {
     }
   };
 
-  // Upload Data
   uploadPhotoAsync = async uri => {
     const path = `${collectionName}/${this.uid}/${uuid.v4()}.jpg`;
     return uploadPhoto(uri, path);
@@ -92,7 +86,6 @@ class Fire {
     }
   };
 
-  // Helpers
   get collection() {
     return firebase.firestore().collection(collectionName);
   }

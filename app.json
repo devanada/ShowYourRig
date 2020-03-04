@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "instagram",
+    "name": "ShowYourRig",
     "description": "Photo Sharing",
-    "slug": "instagram",
+    "slug": "ShowYourRig",
     "privacy": "unlisted",
     "sdkVersion": "35.0.0",
     "version": "1.0.0",
